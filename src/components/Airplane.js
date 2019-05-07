@@ -1,8 +1,12 @@
+<<<<<<< HEAD
 import React, {Component} from 'react'
 import axios from 'axios';
 import _ from 'underscore';
 
   const SERVER_URL = 'http://localhost:3000/airplanes.json';
+=======
+import React, {Component} from 'react';
+>>>>>>> 922d389c7b4a4b0c953f72471710e9475f6a9e04
 
   class Airplane extends Component {
     constructor() {
