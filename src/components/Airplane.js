@@ -8,7 +8,9 @@ import { Link } from 'react-router-dom';
   class Airplane extends Component {
     constructor() {
       super();
-      this.state = {planes: []}
+      this.state = {
+        planes: []
+      }
       this.savePlane = this.savePlane.bind(this);
 
       const fetchPlanes = () => {
@@ -79,11 +81,36 @@ import { Link } from 'react-router-dom';
   };
 
   class DisplayGrid extends Component {
+
+    // constructor() {
+    //   super()
+    //
+    //   this.state = {
+    //     planeRows: [],
+    //     planeCols: [],
+    //   }
+    // }
+    //
+    // renderSeats() {
+    //   console.log(this.props.planes);
+    //   this.props.planes.forEach((plane) => {
+    //     let columns = new Array(plane.column).fill(null)
+    //     let rows = new Array(plane.rows).fill(null)
+    //     console.log(rows);
+    //
+    //   })
+    //   this.setState({planeRows: [...this.state.planeRows, columns]})
+    //   this.setState({planeCols: [...this.state.planeRows, columns]})
+    // }
+
     render() {
       return (
+
+        // {this.renderSeats()}
         <div>
           {this.props.planes.map( (ap) => <div key={ap.id}>{ap.name} <p>{ap.rows} {ap.column}</p></div>)}
         </div>
+
       );
     }
   };
