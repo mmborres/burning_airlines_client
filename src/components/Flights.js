@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 import './../App.css';
 import './../index.css';
 
 const SERVER_URL = 'https://powerpuffairlines.herokuapp.com/flights.json';
+const PLANE_URL = 'https://powerpuffairlines.herokuapp.com/planes.json';
 
 class Flights extends Component {
   constructor() {
@@ -23,8 +25,9 @@ class Flights extends Component {
   }
 
 
-  saveFlight(flightnumber, flightdate, origin_code, destination_code, planename, seats) {
-    axios.post(SERVER_URL, {flightnumber: flightnumber, flightdate: flightdate, origin_code: origin_code, destination_code: destination_code, planename: planename, seats: seats }).then((result) =>{
+  saveFlight(flightnumber, flightdate, origin_code, destination_code, planename, seats, plane_id) {
+    //console.log(flightnumber, flightdate, origin_code, destination_code, planename, seats);
+    axios.post(SERVER_URL, {flightnumber: flightnumber, flightdate: flightdate, origin_code: origin_code, destination_code: destination_code, planename: planename, seats: seats, plane_id: plane_id}).then((result) =>{
       this.setState({flights: [...this.state.flights, result.data]});
     });
   }
@@ -46,7 +49,7 @@ class Flights extends Component {
 class FlightForm extends Component {
   constructor() {
     super();
-    this.state = { flightnumber: '', flightdate: '' , origin_code: '', destination_code: '', planename: '', seats: '' };
+    this.state = { flightnumber: '', flightdate: '' , origin_code: '', destination_code: '', planename: '', seats: 0, plane_id: 0, planes: []};
     this._handleSubmit = this._handleSubmit.bind(this);
     this._handleChangeflightnumber = this._handleChangeflightnumber.bind(this);
     this._handleChangeflightdate = this._handleChangeflightdate.bind(this);
@@ -54,11 +57,21 @@ class FlightForm extends Component {
     this._handleChangedestination_code = this._handleChangedestination_code.bind(this);
     this._handleChangeplanename = this._handleChangeplanename.bind(this);
     this._handleChangeseats = this._handleChangeseats.bind(this);
+
+    const fetchplanes = () => {
+      axios.get(PLANE_URL).then((results) => {
+        this.setState({planes: results.data});
+        setTimeout(fetchplanes, 10000);
+      });
+    };
+    fetchplanes();
   }
 
   _handleSubmit(e) {
     e.preventDefault();
-    this.props.onSubmit(this.state.flight);
+    this.props.onSubmit(this.state.flightnumber, this.state.flightdate, this.state.origin_code, 
+      this.state.destination_code, this.state.planename, this.state.seats, this.state.plane_id);
+
     this.setState({flightnumber: ''});
     this.setState({flightdate: ''});
     this.setState({origin_code: ''});
@@ -88,7 +101,17 @@ class FlightForm extends Component {
   }
 
   _handleChangeplanename(e) {
-    this.setState({ planename: e.target.value,
+    //name:747:cols:6:rows:50:id:1
+    //parse values first
+    const parseme = e.target.value;
+    const p = parseme.split(':');
+    //"name", "747", "cols", "6", "rows", "50", "id", "1"
+    //console.log(p);
+
+    this.setState({ 
+      planename: p[1],
+      seats: ( Number(p[3])*Number(p[5]) ),
+      plane_id: Number(p[7])
       });
   }
 
@@ -127,7 +150,7 @@ class FlightForm extends Component {
           Date:
           <input
             name="flightdate"
-            type="text"
+            type="date"
             value={this.state.flightdate}
             onChange={this._handleChangeflightdate} />
         </label>
@@ -149,19 +172,10 @@ class FlightForm extends Component {
         </label>
         <label>
           Plane:
-          <input
-            name="planename"
-            type="text"
-            value={this.state.planename}
-            onChange={this._handleChangeplanename} />
-        </label>
-        <label>
-          Seats:
-          <input
-            name="seats"
-            type="number"
-            value={this.state.seats}
-            onChange={this._handleChangeseats} />
+          <select name="planename" onChange={this._handleChangeplanename}>
+          <option id="0" name="" value=""></option>
+          { this.state.planes.map( (ap) => <option id={ap.id} key={ap.seats} name={ap.name} value={ "name:" + ap.name + ":cols:" + ap.cols + ":rows:" + ap.rows + ":id:" + ap.id }>{ap.name}</option>) }
+          </select>
         </label>
         <input type="submit" value="Save Flight" />
       </form>
@@ -182,14 +196,14 @@ class Gallery extends Component {
           <th>Plane</th>
           <th>Seats</th>
 {this.props.flights.map((f) =>
-  <tbody>
-  <tr>
-    <td>{f.flightnumber}</td>
-    <td>{f.origin_code}</td>
-    <td>{f.destination_code}</td>
-    <td>{f.flightdate}</td>
-    <td>{f.planename}</td>
-    <td>{f.seats}</td>
+  <tbody key={f.id + 1}>
+  <tr key={f.id + 2}>
+    <td key={f.id + 3}><Link to={ "/flight/" + f.id + "/" + f.plane_id }>{f.flightnumber}</Link></td>
+    <td key={f.id + 4}>{f.origin_code}</td>
+    <td key={f.id + 5}>{f.destination_code}</td>
+    <td key={f.id + 6}>{f.flightdate}</td>
+    <td key={f.id + 7}>{f.planename}</td>
+    <td key={f.id + 8}>{f.seats}</td>
   </tr>
   </tbody>)}
 </table>

@@ -4,7 +4,7 @@ import _ from 'underscore';
 import { Link } from 'react-router-dom';
 import './../App.css';
 
-  const SERVER_URL = 'http://localhost:3000/airplanes.json';
+  const SERVER_URL = 'https://powerpuffairlines.herokuapp.com/planes.json';
 
   class Airplane extends Component {
     constructor() {
@@ -25,7 +25,7 @@ import './../App.css';
     }
 
     savePlane(name, rows, columns) {
-      axios.post(SERVER_URL, {name: name, rows:rows, columns:columns}).then((result) => {
+      axios.post(SERVER_URL, {name: name, rows:rows, cols:columns}).then((result) => {
         this.setState({planes: [...this.state.planes, result.data]})
       });
     }
@@ -107,9 +107,9 @@ import './../App.css';
     render() {
       return (
         // {this.renderSeats()}
-        <div>
-          {this.props.planes.map( (ap) => <div key={ap.id}>{ap.name} <p>{ap.rows} {ap.column}</p></div>)}
-        </div>
+        <table><tr key="123"><th>Plane Name</th><th>Rows</th><th>Columns</th></tr>
+          {this.props.planes.map( (ap) => <tr key={ap.id}><td>{ap.name}</td><td>{ap.rows}</td><td>{ap.cols}</td></tr>)}
+        </table>
       );
     }
   };
