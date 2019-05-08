@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Button, FormGroup, FormControl } from "react-bootstrap";
+import powerpuff from './../img/powerpuff.png';
+import './../App.css';
 import "./Login.css";
 import axios from 'axios';
 import UserProfile from './UserProfile';
@@ -72,7 +74,9 @@ export default class Login extends Component {
 
   render() {
     return (
-      <div className="Login">
+      <div className="App Login">
+      <header className="App-header">
+      <img src={powerpuff} className="App-logo" alt="logo" />
         <form onSubmit={this.handleSubmit} action="/home">
           <FormGroup controlId="email" bsSize="large">
             Email
@@ -100,6 +104,7 @@ export default class Login extends Component {
             Login
           </Button>
         </form>
+        </header>
       </div>
     );
   }
