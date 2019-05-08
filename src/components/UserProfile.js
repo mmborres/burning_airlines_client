@@ -19,6 +19,7 @@ const UserProfile = ( function() {
     const setUserId = function(id) {
         user_id = id;     
         // Also set this in cookie/localStorage
+        console.log(user_id);
     };
 
     const isAdmin = function() {

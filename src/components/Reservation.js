@@ -15,8 +15,8 @@ class Reservation extends Component {
     }
     this.getFlight = this.getFlight.bind(this);
     this.getFlightURL = this.getFlightURL.bind(this);
-    UserProfile.setName("testuser");
-    UserProfile.setUserId(1);
+    //UserProfile.setName("testuser");
+    //UserProfile.setUserId(1);
 
   };
 
@@ -106,10 +106,13 @@ class DisplaySeats extends Component {
   /* button is enabled only after a selection */
 
   handleSubmit = () => {
+    //username: UserProfile.getName(),
+    const user_id = UserProfile.getUserId();
+    console.log(user_id);
     //console.log(this.state.username);
     //console.log(this.state.user_id);
-    //console.log(this.props.flightid);
-    //console.log(this.state.selectedSeat);
+    console.log(this.props.flightid);
+    console.log(this.state.selectedSeat);
 
     const rs_url = "https://powerpuffairlines.herokuapp.com/reservations.json";
     axios.post(rs_url, { user_id: this.state.user_id, flight_id: this.props.flightid, seatnumber: this.state.selectedSeat }).then((result) =>{

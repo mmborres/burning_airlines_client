@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Button, FormGroup, FormControl } from "react-bootstrap";
 import "./Login.css";
 import axios from 'axios';
+import UserProfile from './UserProfile';
 
 const SERVER_URL = 'https://powerpuffairlines.herokuapp.com/users.json';
 
@@ -33,15 +34,30 @@ export default class Login extends Component {
     // store user id
     // via windows localstorage
     let user_id = -1;
+    let userDetail = null;
     //const getUser_id = () => {
       axios.get(SERVER_URL).then((results) => {
         //this.setState({user_id: results.data});
         const userslist = results.data;
+        console.log(this.state.email);
+        console.log(userslist);
         for (let i=0; i<userslist.length; i++) {
           if (userslist[i].email === this.state.email) {
             user_id = userslist[i].id;
+            userDetail = userslist[i];
             break;
           }
+        }
+        console.log(user_id);
+        if ( user_id > 0 ) {
+            console.log("Login=" + userDetail.admin);
+            //user id found
+            //direct to homepage
+            UserProfile.setName(userDetail.name);
+            UserProfile.setUserId(user_id);
+            UserProfile.setAdmin(userDetail.admin)
+            const urlstr = window.location.href + "home";
+            window.location.replace(urlstr);
         }
       });
       //}
@@ -51,9 +67,7 @@ export default class Login extends Component {
     // //if (typeof (Storage) !== "undefined") {
 		// localStorage.setItem('user_id', user_id);
     // //}
-    // // direct to homepage
-    const urlstr = window.location.href + "home";
-    window.location.replace(urlstr);
+    // // 
   }
 
   render() {

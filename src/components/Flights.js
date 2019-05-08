@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import './../App.css';
 import './../index.css';
+import UserProfile from './UserProfile';
 
 const SERVER_URL = 'https://powerpuffairlines.herokuapp.com/flights.json';
 const PLANE_URL = 'https://powerpuffairlines.herokuapp.com/planes.json';
@@ -34,14 +35,27 @@ class Flights extends Component {
 
 
   render () {
-    return (
-      <div>
-        <h1>Enter a flight</h1>
-
-        <FlightForm onSubmit={ this.saveFlight}/>
-        <Gallery flights={ this.state.flights}/>
-      </div>
-    );
+    const admin = UserProfile.isAdmin() === true;
+    if (admin) {
+      return (
+        <div>
+          <h1>Enter a flight</h1>
+  
+          <FlightForm onSubmit={ this.saveFlight}/>
+          <Gallery flights={ this.state.flights}/>
+        </div>
+      );
+    }
+      else {
+        return (
+          <div>
+            <h1>Enter a flight</h1>
+    
+            <Gallery flights={ this.state.flights}/>
+          </div>
+        );
+      }
+    
   }
 };
 
