@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-const SERVER_URL = 'http://localhost:3000/flights.json';
+const SERVER_URL = 'https://powerpuffairlines.herokuapp.com/flights.json';
 
 class Flights extends Component {
   constructor() {
     super();
     this.state = {
-      flights: [{"id":1,"flight":"87","date":"2013-03-03","from":"JFK", "to":"LAX", "plane":"747", "seats":96},
-    {"id":2,"flight":"22","date":"2013-03-04","from":"SVO", "to":"DBX", "plane":"A330", "seats":186}]
+      flights: []
     };
-    this.saveFlight = this. saveFlight.bind(this);
+    this.saveFlight = this.saveFlight.bind(this);
 
     const fetchFlights = () => {
       axios.get(SERVER_URL).then((results) => {
@@ -22,8 +21,8 @@ class Flights extends Component {
   }
 
 
-  saveFlight(flight) {
-    axios.post(SERVER_URL, {flight: flight}).then((result) =>{
+  saveFlight(flightnumber, flightdate, origin_code, destination_code, planename, seats) {
+    axios.post(SERVER_URL, {flightnumber: flightnumber, flightdate: flightdate, origin_code: origin_code, destination_code: destination_code, planename: planename, seats: seats }).then((result) =>{
       this.setState({flights: [...this.state.flights, result.data]});
     });
   }
@@ -33,7 +32,7 @@ class Flights extends Component {
     return (
       <div>
         <h1>Enter a flight</h1>
-        <button onclick="FlightForm">Create New Flight</button> //created a button to show "Create new flight" form on click --doesn't work
+
         <FlightForm onSubmit={ this.saveFlight}/>
         <Gallery flights={ this.state.flights}/>
       </div>
@@ -45,35 +44,58 @@ class Flights extends Component {
 class FlightForm extends Component {
   constructor() {
     super();
-    this.state = { flight: '' };
-    this.state = { date: '' };
-    this.state = { from: '' };
-    this.state = { to: '' };
-    this.state = { plane: '' };
-    this.state = { seats: '' };
+    this.state = { flightnumber: '', flightdate: '' , origin_code: '', destination_code: '', planename: '', seats: '' };
     this._handleSubmit = this._handleSubmit.bind(this);
-    this._handleChange = this._handleChange.bind(this);
+    this._handleChangeflightnumber = this._handleChangeflightnumber.bind(this);
+    this._handleChangeflightdate = this._handleChangeflightdate.bind(this);
+    this._handleChangeorigin_code = this._handleChangeorigin_code.bind(this);
+    this._handleChangedestination_code = this._handleChangedestination_code.bind(this);
+    this._handleChangeplanename = this._handleChangeplanename.bind(this);
+    this._handleChangeseats = this._handleChangeseats.bind(this);
   }
 
   _handleSubmit(e) {
     e.preventDefault();
     this.props.onSubmit(this.state.flight);
-    this.setState({flight: ''});
-    this.setState({date: ''});
-    this.setState({from: ''});
-    this.setState({to: ''});
-    this.setState({plane: ''});
+    this.setState({flightnumber: ''});
+    this.setState({flightdate: ''});
+    this.setState({origin_code: ''});
+    this.setState({destination_code: ''});
+    this.setState({planename: ''});
     this.setState({seats: ''});
   }
 
-  _handleChange(e) {
-    this.detState({ flight: e.target.value,
-      date: e.target.value,
-      from: e.target.value,
-      to: e.target.value,
-      plane: e.target.value,
-      seats: e.target.value});
+  _handleChangeflightnumber(e) {
+    this.setState({ flightnumber: e.target.value
+    });
   }
+
+  _handleChangeflightdate(e) {
+    this.setState({ flightdate: e.target.value,
+      });
+  }
+
+  _handleChangeorigin_code(e) {
+    this.setState({ origin_code: e.target.value,
+      });
+  }
+
+  _handleChangedestination_code(e) {
+    this.setState({ destination_code: e.target.value,
+      });
+  }
+
+  _handleChangeplanename(e) {
+    this.setState({ planename: e.target.value,
+      });
+  }
+
+  _handleChangeseats(e) {
+    this.setState({ seats: e.target.value,
+      });
+  }
+
+
 
   // render() {
   //   return(
@@ -94,42 +116,42 @@ class FlightForm extends Component {
         <label>
           Flight:
           <input
-            name="flight"
+            name="flightnumber"
             type="text"
-            onChange={this._handleChange}
-            value={ this.state.flight } />
+            onChange={this._handleChangeflightnumber}
+            value={ this.state.flightnumber } />
         </label>
         <label>
           Date:
           <input
-            name="date"
+            name="flightdate"
             type="text"
-            value={this.state.date}
-            onChange={this._handleChange} />
+            value={this.state.flightdate}
+            onChange={this._handleChangeflightdate} />
         </label>
         <label>
           From:
           <input
-            name="from"
+            name="origin_code"
             type="text"
-            value={this.state.from}
-            onChange={this._handleChange} />
+            value={this.state.origin_code}
+            onChange={this._handleChangeorigin_code} />
         </label>
         <label>
           To:
           <input
-            name="to"
+            name="destination_code"
             type="text"
-            value={this.state.to}
-            onChange={this._handleChange} />
+            value={this.state.destination_code}
+            onChange={this._handleChangedestination_code} />
         </label>
         <label>
           Plane:
           <input
-            name="plane"
+            name="planename"
             type="text"
-            value={this.state.plane}
-            onChange={this._handleChange} />
+            value={this.state.planename}
+            onChange={this._handleChangeplanename} />
         </label>
         <label>
           Seats:
@@ -137,7 +159,7 @@ class FlightForm extends Component {
             name="seats"
             type="number"
             value={this.state.seats}
-            onChange={this._handleChange} />
+            onChange={this._handleChangeseats} />
         </label>
         <input type="submit" value="Save Flight" />
       </form>
@@ -158,14 +180,14 @@ class Gallery extends Component {
           <th>Plane</th>
           <th>Seats</th>
 {this.props.flights.map((f) =>
-  <tbody>
-  <tr>
-    <td>{f.flight}</td>
-    <td>{f.from}</td>
-    <td>{f.to}</td>
-    <td>{f.date}</td>
-    <td>{f.plane}</td>
-    <td>{f.seats}</td>
+  <tbody key={f.id}>
+  <tr key={f.id}>
+    <td key={f.id}>{f.flightnumber}</td>
+    <td key={f.id}>{f.origin_code}</td>
+    <td key={f.id}>{f.destination_code}</td>
+    <td key={f.id}>{f.flightdate}</td>
+    <td key={f.id}>{f.planename}</td>
+    <td key={f.id}>{f.seats}</td>
   </tr>
   </tbody>)}
 </table>
