@@ -12,3 +12,19 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+
+
+label {
+color: #B4886B;
+font-weight: bold;
+display: block;
+width: 150px;
+float: left;
+}
+
+input[type=submit] {
+  color: red;
+  font-weight: bold;
+
+}

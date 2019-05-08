@@ -3,6 +3,11 @@ import { Link } from 'react-router-dom';
 import './../App.css';
 
 const Home = () => {
+  const temp = localStorage.getItem('user_id');
+			if (temp != null) {
+				//user_id = temp; //peer
+			}
+
   return (
     <div className="App">
       <h2>Welcome To Power Puff Airlines</h2>
@@ -15,6 +20,7 @@ const Home = () => {
       <p>
         <Link to="/search">Search Flights</Link>
       </p>
+
     </div>
   )
 };

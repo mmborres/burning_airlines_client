@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import _ from 'underscore';
 import { Link } from 'react-router-dom';
+import './../App.css';
 
   const SERVER_URL = 'http://localhost:3000/airplanes.json';
 
