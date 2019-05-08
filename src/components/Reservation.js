@@ -3,7 +3,7 @@ import axios from 'axios';
 import _ from 'underscore';
 import { Link } from 'react-router-dom';
 
-  const SERVER_URL = 'https://powerpuffairlines.herokuapp.com/planes.json';
+  const SERVER_URL = 'https://powerpuffairlines.herokuapp.com/planes/1.json';
 
   class Reservation extends Component {
     constructor() {
@@ -17,7 +17,8 @@ import { Link } from 'react-router-dom';
     componentDidMount () {
       axios.get(SERVER_URL).then((results) => {
         console.log(results.data);
-        this.setState({planeRows: results.data[0].rows, planeCols: results.data[0].cols });
+        this.setState({planeRows: results.data.rows, planeCols: results.data.cols });
+        console.log(this.state.planeRows)
         //setTimeout(fetchPlanes, 4000);
       })
     }
@@ -32,37 +33,13 @@ import { Link } from 'react-router-dom';
     }
   };
 
-  class Seat extends React.Component {
-    constructor() {
-      super();
-      this.state = {click: false}
-      this._onClick = this._onClick.bind(this)
-    }
-
-    _onClick(e) {
-      if (!this.state.click) {
-        this.setState({click: true})
-      } else {
-        this.setState({click: false})
-      }
-    }
-  render() {
-    return (
-      <td onClick={this._onClick} className={this.state.click ? 'clicked' : null}>
-        <p>r: {this.props.datarow}</p>
-        <p>c: {this.props.datacol}</p>
-      </td>
-    );
-  }
-}
-
   class DisplaySeats extends Component {
 
     displayRow = (rows, cols) => {
       let table = [];
-      for (let i=1; i<=rows; i++) {
+      for (let i=0; i<rows; i++) {
         let eachRow = [];
-        for (let j=1; j<=cols; j++) {
+        for (let j=0; j<cols; j++) {
           //row+="<span>X</span>";
           eachRow.push(<Seat datacol={j} datarow={i} />)
           // onClick={this._onClick} >{`C: ${j} R: ${i}`}
@@ -88,3 +65,28 @@ import { Link } from 'react-router-dom';
   };
 
 export default Reservation;
+
+class Seat extends React.Component {
+  constructor() {
+    super();
+    this.state = {click: false}
+    this._onClick = this._onClick.bind(this)
+  }
+
+  _onClick(e) {
+    if (!this.state.click) {
+      //this.state.tdelelement.
+      this.setState({click: true, tdelelement: this})
+    } else {
+      this.setState({click: false})
+    }
+  }
+render() {
+  const seatNumber = "" + ( (this.props.datacol + 1) + 9).toString(36).toUpperCase() + (this.props.datarow + 1);
+  return (
+    <td onClick={this._onClick} className={this.state.click ? 'clicked' : null}>
+      <p>{seatNumber}</p>
+    </td>
+  );
+}
+}
