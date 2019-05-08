@@ -15,7 +15,7 @@ import { Link } from 'react-router-dom';
 
       const fetchPlanes = () => {
         axios.get(SERVER_URL).then((results) => {
-          console.log(results.data);
+          console.table(results.data);
           this.setState({planes: results.data});
           //setTimeout(fetchPlanes, 4000);
         })
@@ -105,12 +105,10 @@ import { Link } from 'react-router-dom';
 
     render() {
       return (
-
         // {this.renderSeats()}
         <div>
           {this.props.planes.map( (ap) => <div key={ap.id}>{ap.name} <p>{ap.rows} {ap.column}</p></div>)}
         </div>
-
       );
     }
   };

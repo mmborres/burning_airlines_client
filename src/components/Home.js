@@ -15,6 +15,9 @@ const Home = () => {
       <p>
         <Link to="/search">Search Flights</Link>
       </p>
+      <p>
+        <Link to="/reservation">Search Reservation</Link>
+      </p>
     </div>
   )
 };

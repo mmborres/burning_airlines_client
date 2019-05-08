@@ -17,6 +17,7 @@ const Routes = (
       <Route path="/flights" component={ Flight } />
       <Route path="/search" component={ Search } />
       <Route path="/flight/:id" component={ Reservation } />
+      <Route path="/reservation" component={ Reservation } />
     </div>
   </Router>
 );
