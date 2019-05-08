@@ -20,7 +20,13 @@ const Home = () => {
       <p>
         <Link to="/search">Search Flights</Link>
       </p>
+<<<<<<< HEAD
 
+=======
+      <p>
+        <Link to="/reservation">Search Reservation</Link>
+      </p>
+>>>>>>> 2b753e11bc2d2fcce7700711b6a48ebf68173770
     </div>
   )
 };
