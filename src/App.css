@@ -31,3 +31,18 @@
     transform: rotate(360deg);
   }
 }
+
+td {
+  border: 1px solid black;
+  height: 50px;
+  width: 40px;
+  padding: 0 3em;
+}
+
+td:hover {
+  background-color: pink;
+}
+
+.clicked {
+  background-color: yellow;
+}
