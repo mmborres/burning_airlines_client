@@ -1,12 +1,12 @@
 import React from 'react';
-import Airplane from './Airplane.js'
-import Flights from './Flights.js'
+import Home from './Home';
+import './../App.css';
+
 
 function App() {
   return (
     <div className="App">
-      < Airplane />
-      <Flights />
+      < Home />
     </div>
   );
 }
