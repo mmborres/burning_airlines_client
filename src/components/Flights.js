@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import './../App.css';
+import './../index.css';
 
 const SERVER_URL = 'https://powerpuffairlines.herokuapp.com/flights.json';
 
@@ -180,14 +182,14 @@ class Gallery extends Component {
           <th>Plane</th>
           <th>Seats</th>
 {this.props.flights.map((f) =>
-  <tbody key={f.id}>
-  <tr key={f.id}>
-    <td key={f.id}>{f.flightnumber}</td>
-    <td key={f.id}>{f.origin_code}</td>
-    <td key={f.id}>{f.destination_code}</td>
-    <td key={f.id}>{f.flightdate}</td>
-    <td key={f.id}>{f.planename}</td>
-    <td key={f.id}>{f.seats}</td>
+  <tbody>
+  <tr>
+    <td>{f.flightnumber}</td>
+    <td>{f.origin_code}</td>
+    <td>{f.destination_code}</td>
+    <td>{f.flightdate}</td>
+    <td>{f.planename}</td>
+    <td>{f.seats}</td>
   </tr>
   </tbody>)}
 </table>
