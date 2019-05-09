@@ -79,7 +79,7 @@ export default class Login extends Component {
       <img src={powerpuff} className="App-logo" alt="logo" />
         <form onSubmit={this.handleSubmit} action="/home">
           <FormGroup controlId="email" bsSize="large">
-            Email
+            <span style={{color: 'black'}}>Email</span>
             <FormControl
               autoFocus
               type="email"
@@ -88,7 +88,7 @@ export default class Login extends Component {
             />
           </FormGroup>
           <FormGroup controlId="password" bsSize="large">
-            Password
+          <span style={{color: 'black'}}>Password</span>
             <FormControl
               value={this.state.password}
               onChange={this.handleChange}
