@@ -69,7 +69,7 @@ export default class Login extends Component {
     // //if (typeof (Storage) !== "undefined") {
 		// localStorage.setItem('user_id', user_id);
     // //}
-    // // 
+    // //
   }
 
   render() {
