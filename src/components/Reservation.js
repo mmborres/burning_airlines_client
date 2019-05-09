@@ -27,7 +27,7 @@ class Reservation extends Component {
 
   }
 
-  
+
   getFlight () {
     if (this.state.flight_URL===null) {
       this.getFlightURL();
@@ -39,7 +39,7 @@ class Reservation extends Component {
     });
   }
 
-  componentDidMount () { 
+  componentDidMount () {
     this.getFlightURL();
     this.getFlight();
 

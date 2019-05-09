@@ -83,33 +83,31 @@ import './../App.css';
 
   class DisplayGrid extends Component {
 
-    // constructor() {
-    //   super()
-    //
-    //   this.state = {
-    //     planeRows: [],
-    //     planeCols: [],
-    //   }
-    // }
-    //
-    // renderSeats() {
-    //   console.log(this.props.planes);
-    //   this.props.planes.forEach((plane) => {
-    //     let columns = new Array(plane.column).fill(null)
-    //     let rows = new Array(plane.rows).fill(null)
-    //     console.log(rows);
-    //
-    //   })
-    //   this.setState({planeRows: [...this.state.planeRows, columns]})
-    //   this.setState({planeCols: [...this.state.planeRows, columns]})
-    // }
+    displayPlane = (rows, cols) => {
+
+      let table = [];
+      for (let i=0; i<rows; i++) {
+        let eachRow = [];
+        for (let j=0; j<cols; j++) {
+          eachRow.push(<td className="plane"></td>)
+          // onClick={this._onClick} >{`C: ${j} R: ${i}`}
+        }
+        table.push(<tr data-row={i}>{eachRow}</tr>)
+      }
+      return (
+        table
+      );
+    }
 
     render() {
+
       return (
-        // {this.renderSeats()}
+        <div>
         <table><tr key="123"><th>Plane Name</th><th>Rows</th><th>Columns</th></tr>
           {this.props.planes.map( (ap) => <tr key={ap.id}><td>{ap.name}</td><td>{ap.rows}</td><td>{ap.cols}</td></tr>)}
         </table>
+          {this.displayPlane(10, 5)}
+        </div>
       );
     }
   };

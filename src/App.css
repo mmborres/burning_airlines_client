@@ -50,3 +50,9 @@ td:hover {
 .taken {
   background-color: red;
 }
+
+td.plane {
+  border: 1px solid black;
+  padding: 1em;
+  border-radius: 10px;
+}
