@@ -174,6 +174,7 @@ class FlightForm extends Component {
             value={this.state.flightdate}
             onChange={this._handleChangeflightdate} />
         </label>
+        <br />
         <label>
           From:
           <input
@@ -190,6 +191,7 @@ class FlightForm extends Component {
             value={this.state.destination_code}
             onChange={this._handleChangedestination_code} />
         </label>
+        <br />
         <label>
           Plane:
           <select name="planename" onChange={this._handleChangeplanename}>
@@ -208,7 +210,7 @@ class Gallery extends Component {
     return (
       <div className="flights">
       <h2>Flights</h2>
-        <table>
+        <table className="flighttable">
           <th>Flight</th>
           <th>From</th>
           <th>To</th>
