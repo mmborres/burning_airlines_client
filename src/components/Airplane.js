@@ -3,6 +3,7 @@ import axios from 'axios';
 import _ from 'underscore';
 import { Link } from 'react-router-dom';
 import './../App.css';
+import UserProfile from './UserProfile';
 
   const SERVER_URL = 'https://powerpuffairlines.herokuapp.com/planes.json';
 
@@ -18,7 +19,7 @@ import './../App.css';
         axios.get(SERVER_URL).then((results) => {
           console.table(results.data);
           this.setState({planes: results.data});
-          //setTimeout(fetchPlanes, 4000);
+          setTimeout(fetchPlanes, 4000);
         })
       };
       fetchPlanes();
@@ -29,9 +30,13 @@ import './../App.css';
         this.setState({planes: [...this.state.planes, result.data]})
       });
     }
+    //span style="float: right;">Test</span>
     render() {
+      const admin = UserProfile.isAdmin() === true;
+      if (admin) {
       return (
         <div>
+          
           <h1>Create Airplane</h1>
           <CreateForm onSubmit={this.savePlane}/>
           <DisplayGrid planes={this.state.planes}/>
@@ -41,6 +46,7 @@ import './../App.css';
           </p>
         </div>
       );
+      }
     }
   };
 

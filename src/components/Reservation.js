@@ -10,7 +10,7 @@ class Reservation extends Component {
     this.state = {
       planeRows: 0,
       planeCols: 0,
-      takenseats: [],
+      takenseats: "",
       seats: 0,
       flight_URL: ''
     }
