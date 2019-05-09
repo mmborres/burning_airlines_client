@@ -39,19 +39,25 @@ class Flights extends Component {
     if (admin) {
       return (
         <div>
-          <h1>Enter a flight</h1>
+          <h1>All Flights</h1>
   
           <FlightForm onSubmit={ this.saveFlight}/>
           <Gallery flights={ this.state.flights}/>
+          <p>
+          <Link to="/home">Back to Home</Link>
+          </p>
         </div>
       );
     }
       else {
         return (
           <div>
-            <h1>Enter a flight</h1>
+            <h1>All Flights</h1>
     
             <Gallery flights={ this.state.flights}/>
+            <p>
+            <Link to="/home">Back to Home</Link>
+            </p>
           </div>
         );
       }
