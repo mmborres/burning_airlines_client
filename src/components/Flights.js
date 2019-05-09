@@ -38,7 +38,7 @@ class Flights extends Component {
     const admin = UserProfile.isAdmin() === true;
     if (admin) {
       return (
-        <div>
+        <div className="flights">
           <h1>All Flights</h1>
   
           <FlightForm onSubmit={ this.saveFlight}/>
@@ -51,7 +51,7 @@ class Flights extends Component {
     }
       else {
         return (
-          <div>
+          <div className="flights">
             <h1>All Flights</h1>
     
             <Gallery flights={ this.state.flights}/>
@@ -206,7 +206,7 @@ class FlightForm extends Component {
 class Gallery extends Component {
   render() {
     return (
-      <div>
+      <div className="flights">
       <h2>Flights</h2>
         <table>
           <th>Flight</th>
