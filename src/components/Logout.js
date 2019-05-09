@@ -1,13 +1,21 @@
-const Logout = ( function() {
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import UserProfile from './UserProfile';
 
+class Logout extends Component {
+constructor() {
+  super()
+  UserProfile.setName('');
+  UserProfile.setUserId('');
+  UserProfile.setAdmin('')
+  window.location.href = "/";
+}
 
-    return {
-      logout: logout
-      localStorage.clear();
-      const urlstr = window.location.href + "/";
-      window.location.replace(urlstr);
+  render() {
+
+      return {
+      }
     }
-  
-} )();
+  }
 
   export default Logout;

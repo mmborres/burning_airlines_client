@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './../App.css';
+import powerpuffplane from './../img/powerpuffplane.jpg';
 import UserProfile from './UserProfile';
 
 const Home = () => {
@@ -19,6 +20,9 @@ const Home = () => {
         <p>
           <Link to="/search">Search Flights</Link>
         </p>
+        <p>
+          <Link to="/logout">Logout</Link>
+        </p>
       </div>
     )
   } else {
@@ -31,10 +35,13 @@ const Home = () => {
         <p>
           <Link to="/search">Search Flights</Link>
         </p>
+        <p>
+          <Link to="/logout">Logout</Link>
+        </p>
       </div>
     )
   }
-  
+
 };
 
 export default Home;
