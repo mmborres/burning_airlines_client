@@ -10,7 +10,7 @@ const Home = () => {
   if (admin) {
     return (
       <div className="App">
-        <h2>Welcome To Powerpuff Airlines</h2>
+        <h1>Welcome To Powerpuff Airlines</h1>
         <p>
           <Link to="/airplanes">Airplanes</Link>
         </p>
