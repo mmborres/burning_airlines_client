@@ -37,6 +37,8 @@ td {
   border: 2px solid #c80ce8;
   line-height: 3;
   padding: 0 0em;
+  font-size: 15px;
+  font-weight: bold;
 }
 
 .aisle {
