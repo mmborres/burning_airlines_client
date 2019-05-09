@@ -28,7 +28,7 @@ const Home = () => {
   } else {
     return (
       <div className="App">
-        <h2>Welcome To Powerpuff Airlines</h2>
+        <h1>Welcome To Powerpuff Airlines</h1>
         <p>
           <Link to="/flights">All Flights</Link>
         </p>
