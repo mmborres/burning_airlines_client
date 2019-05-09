@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import UserProfile from './UserProfile';
+import './../App.css';
 import { Link } from 'react-router-dom';
 
 class Reservation extends Component {
@@ -58,7 +59,7 @@ class Reservation extends Component {
     //this.getFlight();
 
     return (
-      <div>
+      <div className="App">
       <h1>Flight Reservation</h1>
       <DisplaySeats planeRows={this.state.planeRows} planeCols={this.state.planeCols} flightid={this.props.match.params.flightid} takenseats={this.state.takenseats} seats={this.state.seats} />
 
@@ -82,11 +83,19 @@ class DisplaySeats extends Component {
 
   /* creating a table of seats */
   displayRow = (rows, cols) => {
+    let aisle = 2;
+    if (cols%2===0) {
+      //even
+      aisle = (cols/2) - 1;
+    } 
 
     let table = [];
     for (let i=0; i<rows; i++) {
       let eachRow = [];
       for (let j=0; j<cols; j++) {
+        if (j==aisle) {
+          eachRow.push(<td className="aisle">XX</td>);
+        }
         eachRow.push(<Seat onSelectSeat={this.handleSeatSelection} datacol={j} datarow={i} selectedSeat= {this.state.selectedSeat} takenseats={this.props.takenseats} seats={this.props.seats} />)
         // onClick={this._onClick} >{`C: ${j} R: ${i}`}
       }
@@ -129,8 +138,8 @@ class DisplaySeats extends Component {
 
   render() {
     return (
-      <div>
-      <div>
+      <div className="App">
+      <div className="App">
       {this.displayRow(this.props.planeRows, this.props.planeCols)}
       </div>
       <p></p>
@@ -157,12 +166,13 @@ class Seat extends React.Component {
     //console.log(this.props.takenseats);
     const takenseats = this.props.takenseats;
 
-    const seatNumber = "" + ( (this.props.datacol + 1) + 9).toString(36).toUpperCase() + (this.props.datarow + 1);
+    //const seatNumber = "" + ( (this.props.datacol + 1) + 9).toString(36).toUpperCase() + (this.props.datarow + 1);
+    const seatNumber = "" + (this.props.datarow + 1) + ( (this.props.datacol + 1) + 9).toString(36).toUpperCase();
     //console.log(seatNumber);
 
     let className = this.props.selectedSeat === seatNumber ? 'clicked' : '';
     if (takenseats!==null && takenseats!=="") {
-      className = takenseats.includes(seatNumber + ",") ? 'taken' : className;
+      className = takenseats.includes(seatNumber + ",") ? 'taken' : '';
     }
 
     return (

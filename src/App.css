@@ -9,7 +9,7 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: #985fb5;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -34,8 +34,14 @@
 
 
 td {
-  border: 1px solid black;
-  padding: 0 3em;
+  border: 2px solid #c80ce8;
+  line-height: 3;
+  padding: 0 0em;
+}
+
+.aisle {
+  background-color: #c80ce8;
+  color: #c80ce8;
 }
 
 td:hover {
@@ -51,8 +57,12 @@ td:hover {
   background-color: red;
 }
 
+img {
+  border-radius: 50%;
+}
+
 td.plane {
   border: 1px solid black;
-  padding: 1em;
   border-radius: 10px;
+  padding: 1em;
 }
