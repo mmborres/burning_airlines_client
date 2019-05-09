@@ -120,15 +120,14 @@ a:hover {
 .airplaneform input[type=submit] {
     color: #1F618D;
     font-size: 20px;
-    background-color: grey;
+    background-color: black;
     padding: 10px;
     margin: 10px;
-    font-weight: bold;
     border-radius: 10px;
   }
 
 .airplaneform input[type=submit]:hover {
-  background-color: black;
+  color: brown;
 }
 
 .displayplane {

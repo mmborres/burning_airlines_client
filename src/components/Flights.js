@@ -38,9 +38,9 @@ class Flights extends Component {
     const admin = UserProfile.isAdmin() === true;
     if (admin) {
       return (
-        <div>
+        <div className="flights">
           <h1>All Flights</h1>
-  
+
           <FlightForm onSubmit={ this.saveFlight}/>
           <Gallery flights={ this.state.flights}/>
           <p>
@@ -53,7 +53,7 @@ class Flights extends Component {
         return (
           <div>
             <h1>All Flights</h1>
-    
+
             <Gallery flights={ this.state.flights}/>
             <p>
             <Link to="/home">Back to Home</Link>
@@ -61,7 +61,7 @@ class Flights extends Component {
           </div>
         );
       }
-    
+
   }
 };
 
@@ -89,7 +89,7 @@ class FlightForm extends Component {
 
   _handleSubmit(e) {
     e.preventDefault();
-    this.props.onSubmit(this.state.flightnumber, this.state.flightdate, this.state.origin_code, 
+    this.props.onSubmit(this.state.flightnumber, this.state.flightdate, this.state.origin_code,
       this.state.destination_code, this.state.planename, this.state.seats, this.state.plane_id);
 
     this.setState({flightnumber: ''});
@@ -128,7 +128,7 @@ class FlightForm extends Component {
     //"name", "747", "cols", "6", "rows", "50", "id", "1"
     //console.log(p);
 
-    this.setState({ 
+    this.setState({
       planename: p[1],
       seats: ( Number(p[3])*Number(p[5]) ),
       plane_id: Number(p[7])
