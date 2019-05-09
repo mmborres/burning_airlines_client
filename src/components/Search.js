@@ -95,8 +95,9 @@ class SearchForm extends Component {
   render() {
     return (
       <div>
+      <h1> Search Flights</h1>
       <form onSubmit={ this._handleSubmit }>
-        Search Flights <br/>
+         <br/>
         From: <input type="search" placeholder="Sydney" required onInput={ this._handleInputFrom } />
         To: <input type="search" placeholder="Melbourne" required onInput={ this._handleInputTo } />
         <input type="submit" value="Search" />
