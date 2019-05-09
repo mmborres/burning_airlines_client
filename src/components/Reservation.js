@@ -59,11 +59,11 @@ class Reservation extends Component {
     //this.getFlight();
 
     return (
-      <div className="App">
+      <div>
       <h1>Flight Reservation</h1>
       <DisplaySeats planeRows={this.state.planeRows} planeCols={this.state.planeCols} flightid={this.props.match.params.flightid} takenseats={this.state.takenseats} seats={this.state.seats} />
 
-      <Link to={ "/flights/" }><button className="selectpayemnt" >Payment Done</button></Link>
+      <Link to={ "/flights/" }><button className="selectpayment" >Payment Done</button></Link>
       <p>
           <Link to="/home">Back to Home</Link>
       </p>
@@ -146,7 +146,7 @@ class DisplaySeats extends Component {
       {this.displayRow(this.props.planeRows, this.props.planeCols)}
       </div>
       <p></p>
-      <button id="select" disabled={!this.state.selectedSeat} onClick={this.handleSubmit}>Select</button>
+      <button className="selectpayment" disabled={!this.state.selectedSeat} onClick={this.handleSubmit}>Select</button>
       </div>
     );
   }
