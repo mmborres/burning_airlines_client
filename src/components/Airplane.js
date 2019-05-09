@@ -35,6 +35,10 @@ import './../App.css';
           <h1>Create Airplane</h1>
           <CreateForm onSubmit={this.savePlane}/>
           <DisplayGrid planes={this.state.planes}/>
+
+          <p>
+          <Link to="/home">Back to Home</Link>
+          </p>
         </div>
       );
     }

@@ -64,6 +64,9 @@ class Reservation extends Component {
       <DisplaySeats planeRows={this.state.planeRows} planeCols={this.state.planeCols} flightid={this.props.match.params.flightid} takenseats={this.state.takenseats} seats={this.state.seats} />
 
       <Link to={ "/flights/" }><button>Payment Done</button></Link>
+      <p>
+          <Link to="/home">Back to Home</Link>
+      </p>
       </div>
     )
   }
@@ -86,7 +89,7 @@ class DisplaySeats extends Component {
     let aisle = 2;
     if (cols%2===0) {
       //even
-      aisle = (cols/2) - 1;
+      aisle = cols/2;
     } 
 
     let table = [];
@@ -172,7 +175,7 @@ class Seat extends React.Component {
 
     let className = this.props.selectedSeat === seatNumber ? 'clicked' : '';
     if (takenseats!==null && takenseats!=="") {
-      className = takenseats.includes(seatNumber + ",") ? 'taken' : '';
+      className = takenseats.includes(seatNumber + ",") ? 'taken' : className;
     }
 
     return (
