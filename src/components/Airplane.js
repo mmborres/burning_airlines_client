@@ -35,8 +35,7 @@ import UserProfile from './UserProfile';
       const admin = UserProfile.isAdmin() === true;
       if (admin) {
       return (
-        <div>
-          
+        <div className="airplane">
           <h1>Create Airplane</h1>
           <CreateForm onSubmit={this.savePlane}/>
           <DisplayGrid planes={this.state.planes}/>
@@ -78,14 +77,18 @@ import UserProfile from './UserProfile';
     }
     render() {
       return (
-        <form onSubmit={this._handleSubmit}>
+        <form onSubmit={this._handleSubmit} className="airplaneform">
           <label>Name</label>
           <input type="text" onInput={this._handleInputName}/>
+          <br />
           <label>Rows</label>
           <input type="number" onInput={this._handleInputRows} />
+          <br />
           <label>Columns</label>
           <input type="number" onInput={this._handleInputColumns} />
+          <br />
           <input type ="submit" />
+          <br />
         </form>
       );
     }
@@ -112,8 +115,8 @@ import UserProfile from './UserProfile';
     render() {
 
       return (
-        <div>
-        <table><tr key="123"><th>Plane Name</th><th>Rows</th><th>Columns</th></tr>
+        <div className="displayplane">
+        <table className="planetable"><tr key="123"><th>Plane Name</th><th>Rows</th><th>Columns</th></tr>
           {this.props.planes.map( (ap) => <tr key={ap.id}><td>{ap.name}</td><td>{ap.rows}</td><td>{ap.cols}</td></tr>)}
         </table>
           {this.displayPlane(10, 5)}
