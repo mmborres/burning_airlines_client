@@ -132,7 +132,11 @@ class DisplaySeats extends Component {
     });
 
     const flight_URL = "https://powerpuffairlines.herokuapp.com/flights/" + this.props.flightid + ".json"; //make dynamic
-    const takenseats = this.props.takenseats + "," + this.state.selectedSeat + ",";
+    let startseats = "";
+    if (this.props.takenseats!==null) {
+      startseats = this.props.takenseats;
+    }
+    const takenseats = startseats + "," + this.state.selectedSeat + ",";
 
     axios.put(flight_URL, { takenseats: takenseats, seats: (this.props.seats - 1) }).then((result) =>{
       //this.setState({flights: [...this.state.flights, result.data]});
