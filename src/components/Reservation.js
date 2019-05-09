@@ -63,7 +63,7 @@ class Reservation extends Component {
       <h1>Flight Reservation</h1>
       <DisplaySeats planeRows={this.state.planeRows} planeCols={this.state.planeCols} flightid={this.props.match.params.flightid} takenseats={this.state.takenseats} seats={this.state.seats} />
 
-      <Link to={ "/flights/" }><button>Payment Done</button></Link>
+      <Link to={ "/flights/" }><button className="selectpayemnt" >Payment Done</button></Link>
       <p>
           <Link to="/home">Back to Home</Link>
       </p>
@@ -141,12 +141,12 @@ class DisplaySeats extends Component {
 
   render() {
     return (
-      <div className="App">
-      <div className="App">
+      <div className="seatdisplay">
+      <div className="seatdisplay">
       {this.displayRow(this.props.planeRows, this.props.planeCols)}
       </div>
       <p></p>
-      <button disabled={!this.state.selectedSeat} onClick={this.handleSubmit}>Select</button>
+      <button id="select" disabled={!this.state.selectedSeat} onClick={this.handleSubmit}>Select</button>
       </div>
     );
   }
@@ -179,7 +179,7 @@ class Seat extends React.Component {
     }
 
     return (
-      <td onClick={this._onClick} className={className}>
+      <td  className="seat"  onClick={this._onClick} className={className}>
       {seatNumber}
       </td>
     );
