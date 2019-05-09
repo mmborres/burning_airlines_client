@@ -51,7 +51,8 @@ class Search extends Component {
 };
 
 ////
-
+//{ props.flights.map( (flight) => <a href={flight.url} target="_blank" key={flight.id} rel="noopener noreferrer"> {flight.flightnumber} </a>)}
+    
 const Flights = (props) => {
   //console.log("inside Flights = " + props.flights.length); //.flights.url);
   if (props.flights.length === 0) {
@@ -61,7 +62,7 @@ const Flights = (props) => {
     <div>
       <br />
       Flights: <br />
-      { props.flights.map( (flight) => <a href={flight.url} target="_blank" key={flight.id} rel="noopener noreferrer"> {flight.flightnumber} </a>)}
+      { props.flights.map( (flight) => <Link to={ "/flight/" + flight.id + "/" + flight.plane_id }>{flight.flightnumber}</Link> )}
     </div>
   )
   }
