@@ -34,6 +34,8 @@ body {
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+  border-radius: 10px;
+  color: black;
 }
 
 .App-link {
@@ -141,4 +143,16 @@ a:hover {
 
 .planetable th {
   padding-right: 10px;
+}
+
+.App-header button {
+  color: blue;
+  padding: 10px;
+  font-size: 15px;
+  border-radius: 10px;
+  font-weight: 500;
+}
+
+.App-header button:hover {
+  background-color: pink;
 }

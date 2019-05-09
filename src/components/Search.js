@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import axios from 'axios'; // installed with: npm install axios
 //import _ from 'underscore';
 import './../App.css';
-//import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 
 const SERVER_URL = 'https://powerpuffairlines.herokuapp.com/flights.json';
@@ -93,12 +93,17 @@ class SearchForm extends Component {
 
   render() {
     return (
+      <div>
       <form onSubmit={ this._handleSubmit }>
         Search Flights <br/>
         From: <input type="search" placeholder="Sydney" required onInput={ this._handleInputFrom } />
         To: <input type="search" placeholder="Melbourne" required onInput={ this._handleInputTo } />
         <input type="submit" value="Search" />
       </form>
+      <p>
+      <Link to="/home">Back to Home</Link>
+      </p>
+      </div>
     );
   }
 }
