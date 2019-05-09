@@ -52,7 +52,7 @@ body {
 }
 
 td {
-  border: 2px solid #c80ce8;
+  border: 2px solid #f5b041;
   line-height: 3;
   padding: 0 0em;
   font-size: 15px;
@@ -60,17 +60,17 @@ td {
 }
 
 .aisle {
-  background-color: #c80ce8;
-  color: #c80ce8;
+  background-color: #f5b041;
+  color: #f5b041;
+  border-radius: 0;
 }
 
 td:hover {
-  border-color: red;
   background-color: pink;
 }
 
 .clicked {
-  background-color: yellow;
+  background-color: pink;
 }
 
 .taken {
@@ -92,10 +92,21 @@ table {
 }
 
 .airplane {
+  display: flex;
+  flex-direction: column;
   background-color: rgba(111, 111, 111, 0.5);
   text-align: center;
   border-radius: 30px;
 }
+
+.flights {
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(111, 111, 111, 0.5);
+  text-align: center;
+  border-radius: 30px;
+}
+
 
 a {
   color: brown;
@@ -134,8 +145,31 @@ a:hover {
 }
 
 .displayplane {
+  display: flex;
+  flex-direction: column;
   text-align: center;
   align-items: center;
+  padding: 10px;
+  margin-top: 30px;
+  
+}
+
+.seatdisplay {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  padding: 10px;
+  margin: 20px;
+}
+
+.seatdisplay td {
+  padding: 20px;
+  width: 40px;
+  border-radius: 10px;
+  font-size: 20px;
+  font-weight: bold;
+  
 }
 
 .planetable {
@@ -156,4 +190,18 @@ a:hover {
 
 .App-header button:hover {
   background-color: pink;
+}
+
+button.select {
+  /*color: blue;
+  margin: 10px;
+  width: 50px;*/
+
+  color: #1F618D;
+    font-size: 20px;
+    background-color: grey;
+    padding: 10px;
+    margin: 10px;
+    font-weight: bold;
+    border-radius: 10px;
 }
