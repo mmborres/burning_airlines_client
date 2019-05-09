@@ -85,6 +85,7 @@ td.plane {
   border: 1px solid black;
   border-radius: 10px;
   padding: 1em;
+  background-color: pink;
 }
 
 table {
@@ -115,7 +116,7 @@ a {
 }
 
 a:hover {
-  color: #1F618D;
+  color:white;
 }
 
 .airplaneform {
@@ -130,17 +131,31 @@ a:hover {
   margin: 10px;
   }
 
+
 .airplaneform input[type=submit] {
-    color: #1F618D;
+    color: white;
     font-size: 20px;
-    background-color: black;
+    background-color: #985fb5;
     padding: 10px;
     margin: 10px;
     border-radius: 10px;
   }
 
 .airplaneform input[type=submit]:hover {
-  color: brown;
+  background-color: black;
+}
+
+.flights input[type=submit] {
+  color: white;
+  font-size: 20px;
+  background-color: #985fb5;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 10px;
+}
+
+.flights input[type=submit]:hover {
+background-color: black;
 }
 
 .displayplane {
@@ -173,10 +188,25 @@ a:hover {
 
 .planetable {
   text-align: center;
+  border: 10px solid black;
+  margin-bottom: 20px;
 }
 
 .planetable th {
-  padding-right: 10px;
+  padding-right: 20px;
+  color: white;
+}
+
+.flighttable td {
+  background-color: #f5b041;
+  border: 3px solid black;
+  border-style: inset;
+}
+
+.planetable td {
+  background-color: #f5b041;
+  border: 1px solid black;
+
 }
 
 .App-header button {
@@ -191,16 +221,21 @@ a:hover {
   background-color: pink;
 }
 
-button.select {
-  /*color: blue;
-  margin: 10px;
-  width: 50px;*/
+button.selectpayment {
+  color: white;
+  font-size: 20px;
+  background-color: #985fb5;
+  padding: 10px;
+  border-radius: 10px;
+}
 
-  color: #1F618D;
-    font-size: 20px;
-    background-color: grey;
-    padding: 10px;
-    margin: 10px;
-    font-weight: bold;
-    border-radius: 10px;
+button.selectpayment:hover {
+  background-color: black;
+
+}
+
+h1 {
+  background-color: #985fb5;
+  padding: 10px;
+  border-radius: 10px;
 }
