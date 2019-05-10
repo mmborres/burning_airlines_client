@@ -16,12 +16,12 @@ const Routes = (
   <Router>
     <div>
       <Route exact path="/" component={ Login } />
-      <Route path="/logout" component={ Logout } />
       <Route exact path="/airplanes" component={ Airplane } />
       <Route path="/flights" component={ Flights } />
       <Route path="/search" component={ Search } />
       <Route path="/flight/:flightid/:planeid" component={ Reservation } />
       <Route path="/home" component={Home} />
+      <Route path="/logout" component={ Logout } />
     </div>
   </Router>
 );
