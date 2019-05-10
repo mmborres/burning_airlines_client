@@ -1,8 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './../App.css';
-import powerpuffplane from './../img/powerpuffplane.jpg';
+//import powerpuffplane from './../img/powerpuffplane.jpg';
 import UserProfile from './UserProfile';
+import Hello from './Hello';
 
 const Home = () => {
   const admin = UserProfile.isAdmin() === true;
@@ -11,6 +12,7 @@ const Home = () => {
     return (
       <div className="App">
         <h1>Welcome To Powerpuff Airlines</h1>
+        <Hello/ >
         <p>
           <Link to="/airplanes">Airplanes</Link>
         </p>
