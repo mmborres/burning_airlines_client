@@ -12,7 +12,12 @@ class Reservation extends Component {
       planeCols: 0,
       takenseats: "",
       seats: 0,
-      flight_URL: ''
+      flight_URL: '',
+      planename: '',
+      origin: '',
+      destination: '',
+      flightnum: '',
+      flightdate: ''
     }
     this.getFlight = this.getFlight.bind(this);
     this.getFlightURL = this.getFlightURL.bind(this);
@@ -35,7 +40,15 @@ class Reservation extends Component {
     }
     axios.get(this.state.flight_URL).then((results) => {
       if (results!==null && results.data!==null && results.data.takenseats!==undefined) {
-        this.setState({ takenseats: results.data.takenseats, seats: results.data.seats });
+        let fr = results.data.origin;
+        if (fr === null || fr === "") {
+          fr = results.data.origin_code;
+        }
+        let t = results.data.destination;
+        if (t === null || t === "") {
+          t = results.data.destination_code;
+        }
+        this.setState({ takenseats: results.data.takenseats, seats: results.data.seats, from: fr, to: t, planename: results.data.planename, flightnum: results.data.flightnumber, flightdate: results.data.flightdate });
       }
     });
   }
@@ -60,7 +73,9 @@ class Reservation extends Component {
 
     return (
       <div>
-      <h1>Flight Reservation</h1>
+      <h1>Flight Reservation for { this.state.flightnum }</h1> 
+      <h2>Flying from { this.state.from } to { this.state.to } 
+      <br />on { this.state.flightdate } (Plane: {this.state.planename})</h2>
       <DisplaySeats planeRows={this.state.planeRows} planeCols={this.state.planeCols} flightid={this.props.match.params.flightid} takenseats={this.state.takenseats} seats={this.state.seats} />
 
       <Link to={ "/flights/" }><button className="selectpayment" >Payment Done</button></Link>
@@ -123,7 +138,7 @@ class DisplaySeats extends Component {
     console.log(this.props.flightid);
     console.log(this.state.selectedSeat);
     const hotseat = this.state.selectedSeat.trim();
-    const canAddSeat = true;
+    let canAddSeat = true;
 
     let startseats = "";
     if (this.props.takenseats!==null) {
@@ -171,6 +186,7 @@ class Seat extends React.Component {
   /* selectedSeat state is initially blank in the parent class DisplaySeats and it is being passed to this child class Seat as props so that the click <td> innertext(seatNumber) can be stored inside selectedSeat and the seatNumber can be passed into the onSelectSeat function as an argument */
   _onClick(e) {
       const seat = e.currentTarget.innerText;
+      console.log("onClick==" + seat);
       this.setState({selectedSeat: seat})
       this.props.onSelectSeat(seat);
   }
@@ -188,11 +204,19 @@ class Seat extends React.Component {
       className = takenseats.includes(seatNumber + ",") ? 'taken' : className;
     }
 
-    return (
-      <td onClick={this._onClick} className={className}>
-      {seatNumber}
-      </td>
-    );
+    if (className==="taken") {
+      return (
+        <td onClick={this._onClick} className="taken" id={seatNumber} style={{pointerEvents: 'none', disabled: true, hover: 'none'}}>
+        {seatNumber}
+        </td>
+      );
+    } else {
+      return (
+        <td onClick={this._onClick} className={className} id={seatNumber}>
+        {seatNumber}
+        </td>
+      );
+    }
   }
 }
 
