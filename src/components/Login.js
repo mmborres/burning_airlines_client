@@ -57,7 +57,8 @@ export default class Login extends Component {
             //direct to homepage
             UserProfile.setName(userDetail.name);
             UserProfile.setUserId(user_id);
-            UserProfile.setAdmin(userDetail.admin)
+            UserProfile.setAdmin(userDetail.admin);
+            UserProfile.setEmail(userDetail.email);
             const urlstr = window.location.href + "home";
             window.location.replace(urlstr);
         }
