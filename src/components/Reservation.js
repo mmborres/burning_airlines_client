@@ -96,8 +96,8 @@ class DisplaySeats extends Component {
     for (let i=0; i<rows; i++) {
       let eachRow = [];
       for (let j=0; j<cols; j++) {
-        if (j==aisle) {
-          eachRow.push(<td className="aisle">XX</td>);
+        if (j===aisle) {
+          eachRow.push(<td className="aisle" style={{pointerEvents: 'none', borderRadius: '0px', disabled: true, hover: 'none'}}>XX</td>);
         }
         eachRow.push(<Seat onSelectSeat={this.handleSeatSelection} datacol={j} datarow={i} selectedSeat= {this.state.selectedSeat} takenseats={this.props.takenseats} seats={this.props.seats} />)
         // onClick={this._onClick} >{`C: ${j} R: ${i}`}
@@ -118,29 +118,35 @@ class DisplaySeats extends Component {
   /* button is enabled only after a selection */
 
   handleSubmit = () => {
-    //username: UserProfile.getName(),
     const user_id = UserProfile.getUserId();
     console.log(user_id);
-    //console.log(this.state.username);
-    //console.log(this.state.user_id);
     console.log(this.props.flightid);
     console.log(this.state.selectedSeat);
+    const hotseat = this.state.selectedSeat.trim();
+    const canAddSeat = true;
 
-    const rs_url = "https://powerpuffairlines.herokuapp.com/reservations.json";
-    axios.post(rs_url, { user_id: this.state.user_id, flight_id: this.props.flightid, seatnumber: this.state.selectedSeat }).then((result) =>{
-      //this.setState({flights: [...this.state.flights, result.data]});
-    });
-
-    const flight_URL = "https://powerpuffairlines.herokuapp.com/flights/" + this.props.flightid + ".json"; //make dynamic
     let startseats = "";
     if (this.props.takenseats!==null) {
-      startseats = this.props.takenseats;
+      startseats = this.props.takenseats.trim();
+      //check if already there, for validation
+      canAddSeat = !(startseats.includes(hotseat));
     }
-    const takenseats = startseats + "," + this.state.selectedSeat + ",";
 
-    axios.put(flight_URL, { takenseats: takenseats, seats: (this.props.seats - 1) }).then((result) =>{
-      //this.setState({flights: [...this.state.flights, result.data]});
-    });
+    if (hotseat!==null && hotseat!=="" && canAddSeat===true ) {
+      const rs_url = "https://powerpuffairlines.herokuapp.com/reservations.json";
+      axios.post(rs_url, { user_id: this.state.user_id, flight_id: this.props.flightid, seatnumber: hotseat }).then((result) =>{
+      //post actions
+      });
+
+      const flight_URL = "https://powerpuffairlines.herokuapp.com/flights/" + this.props.flightid + ".json"; //make dynamic
+      
+      const takenseats = startseats + "," + hotseat + ",";
+
+      axios.put(flight_URL, { takenseats: takenseats, seats: (this.props.seats - 1) }).then((result) =>{
+        //post actions
+      });
+    }
+
   }
 
   render() {
@@ -183,7 +189,7 @@ class Seat extends React.Component {
     }
 
     return (
-      <td  className="seat"  onClick={this._onClick} className={className}>
+      <td onClick={this._onClick} className={className}>
       {seatNumber}
       </td>
     );
