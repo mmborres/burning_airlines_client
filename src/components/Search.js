@@ -88,6 +88,13 @@ const Flights = (props) => {
     )
     */
 ////
+  const flightsSortedByDate = props.flights;
+  flightsSortedByDate.sort( function(a,b){
+        // Turn your strings into dates, and then subtract them
+        // to get a value that is either negative, positive, or zero.
+    return new Date(a.flightdate) - new Date(b.flightdate);
+  });
+
 return (
   <div className="flights">
   <h2>Flights</h2>
@@ -98,7 +105,7 @@ return (
       <th>Date</th>
       <th>Plane</th>
       <th>Seats</th>
-{props.flights.map((f) =>
+{flightsSortedByDate.map((f) =>
 <tbody key={f.id + 1}>
 <tr key={f.id + 2}>
 <td key={f.id + 3}><Link to={ "/flight/" + f.id + "/" + f.plane_id }>{f.flightnumber}</Link></td>
