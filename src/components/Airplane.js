@@ -119,7 +119,7 @@ import UserProfile from './UserProfile';
         <table className="planetable"><tr key="123"><th>Plane Name</th><th>Rows</th><th>Columns</th></tr>
           {this.props.planes.map( (ap) => <tr key={ap.id}><td>{ap.name}</td><td>{ap.rows}</td><td>{ap.cols}</td></tr>)}
         </table>
-          {this.displayPlane(10, 5)}
+          {/*this.displayPlane(10, 5)*/}
         </div>
       );
     }
