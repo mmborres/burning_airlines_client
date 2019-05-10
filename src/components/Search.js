@@ -14,13 +14,15 @@ class Search extends Component {
     this.fetchFlights = this.fetchFlights.bind(this); 
   }
 
-  fetchFlights = (from, to) => {
+  fetchFlights = (f, t) => {
+    const from = f.toUpperCase();
+    const to = t.toUpperCase();
     console.log('Searching Flights from: ', from);
     console.log('And to: ', to);
 
     axios.get(SERVER_URL).then((results) => {
 
-      //console.log(results.data);
+      console.log(results.data);
       //set-up display
 
       const f_in = results.data;
@@ -28,9 +30,28 @@ class Search extends Component {
 
       for(let i=0; i<f_in.length; i++) {
         const flight = f_in[i];
-        //console.log(flight.origin);
-        if ( flight.origin===from && flight.destination===to ) {
+        //console.log(flight);
+
+        if (from==="" && to==="") { //all flights
           listflights.push(flight); 
+        } else if (from!=="" && to==="") {
+          //TO is empty
+          if ( ( (flight.origin!==null && flight.origin.toUpperCase()===from) || flight.origin_code===from ) ) {
+            //console.log('flight added')
+            listflights.push(flight); 
+          }
+        } else if (to!=="" && from==="") {
+          //FROM is empty
+          if ( ( (flight.destination!==null && flight.destination.toUpperCase()===to) || flight.destination_code===to) ) {
+            //console.log('flight added')
+            listflights.push(flight); 
+          }
+        } else {
+          if ( (flight.origin.toUpperCase()===from || flight.origin_code===from) && 
+            (flight.destination.toUpperCase()===to || flight.destination_code===to) ) {
+              //console.log('flight added')
+              listflights.push(flight); 
+          }
         }
       }
       
@@ -58,14 +79,42 @@ const Flights = (props) => {
   if (props.flights.length === 0) {
     return ''; // no results to show yet
   } else {
-  return (
+/*  return (
     <div>
       <br />
       Flights: <br />
       { props.flights.map( (flight) => <Link to={ "/flight/" + flight.id + "/" + flight.plane_id }>{flight.flightnumber}</Link> )}
     </div>
-  )
-  }
+    )
+    */
+////
+return (
+  <div className="flights">
+  <h2>Flights</h2>
+    <table className="flighttable">
+      <th>Flight</th>
+      <th>From</th>
+      <th>To</th>
+      <th>Date</th>
+      <th>Plane</th>
+      <th>Seats</th>
+{props.flights.map((f) =>
+<tbody key={f.id + 1}>
+<tr key={f.id + 2}>
+<td key={f.id + 3}><Link to={ "/flight/" + f.id + "/" + f.plane_id }>{f.flightnumber}</Link></td>
+<td key={f.id + 4}>{f.origin_code}</td>
+<td key={f.id + 5}>{f.destination_code}</td>
+<td key={f.id + 6}>{f.flightdate}</td>
+<td key={f.id + 7}>{f.planename}</td>
+<td key={f.id + 8}>{f.seats}</td>
+</tr>
+</tbody>)}
+</table>
+  </div>
+
+);
+  } //end
+////
 };
 
 /////
@@ -98,8 +147,8 @@ class SearchForm extends Component {
       <h1> Search Flights</h1>
       <form onSubmit={ this._handleSubmit }>
          <br/>
-        From: <input type="search" placeholder="Sydney" required onInput={ this._handleInputFrom } />
-        To: <input type="search" placeholder="Melbourne" required onInput={ this._handleInputTo } />
+        From: <input type="search" placeholder="Sydney" defaultValue="" onInput={ this._handleInputFrom } />
+        To: <input type="search" placeholder="Melbourne" defaultValue="" onInput={ this._handleInputTo } />
         <input type="submit" value="Search" />
       </form>
       <p>
