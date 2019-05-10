@@ -98,6 +98,8 @@ class FlightForm extends Component {
     this.setState({destination_code: ''});
     this.setState({planename: ''});
     this.setState({seats: ''});
+    //unselect plane from dropdown
+    document.getElementById("selectplanename").selectedIndex = "-1"; //select none
   }
 
   _handleChangeflightnumber(e) {
@@ -194,7 +196,7 @@ class FlightForm extends Component {
         <br />
         <label>
           Plane:
-          <select name="planename" onChange={this._handleChangeplanename}>
+          <select id="selectplanename" name="planename" onChange={this._handleChangeplanename}>
           <option id="0" name="" value=""></option>
           { this.state.planes.map( (ap) => <option id={ap.id} key={ap.seats} name={ap.name} value={ "name:" + ap.name + ":cols:" + ap.cols + ":rows:" + ap.rows + ":id:" + ap.id }>{ap.name}</option>) }
           </select>
