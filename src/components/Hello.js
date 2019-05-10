@@ -11,9 +11,9 @@ class Hello extends Component {
             name = UserProfile.getEmail();
         }
         return (
-          <div>
+          <h2>
             Hello, {name}
-          </div>
+          </h2>
         );
       }
 };
