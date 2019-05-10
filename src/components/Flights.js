@@ -209,6 +209,15 @@ class FlightForm extends Component {
 
 class Gallery extends Component {
   render() {
+    const flightsSortedByDate = this.props.flights;
+    flightsSortedByDate.sort( function(a,b){
+      // Turn your strings into dates, and then subtract them
+      // to get a value that is either negative, positive, or zero.
+      return new Date(a.flightdate) - new Date(b.flightdate);
+    });
+
+    //console.log (flightsSortedByDate);
+
     return (
       <div className="flights">
       <h2>Flights</h2>
@@ -219,7 +228,7 @@ class Gallery extends Component {
           <th>Date</th>
           <th>Plane</th>
           <th>Seats</th>
-{this.props.flights.map((f) =>
+{flightsSortedByDate.map((f) =>
   <tbody key={f.id + 1}>
   <tr key={f.id + 2}>
     <td key={f.id + 3}><Link to={ "/flight/" + f.id + "/" + f.plane_id }>{f.flightnumber}</Link></td>
