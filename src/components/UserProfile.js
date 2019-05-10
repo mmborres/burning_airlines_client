@@ -1,5 +1,6 @@
 const UserProfile = ( function() {
     let full_name = "";
+    let email = "";
     let user_id = -1;
     let adminFlag = false;
   
@@ -16,10 +17,34 @@ const UserProfile = ( function() {
     };
   
     const setName = function(name) {
-      full_name = name;     
-      // Also set this in cookie/localStorage
+      if (name!==null) {
+        full_name = name;     
+        // Also set this in cookie/localStorage
+        if (typeof (Storage) !== "undefined") {
+          localStorage.setItem('full_name', full_name);
+        }
+      }
+    };
+
+    const getEmail= function() {
+      
       if (typeof (Storage) !== "undefined") {
-        localStorage.setItem('full_name', full_name);
+        let temp = localStorage.getItem('email');
+        if (temp != null) {
+          email = temp; 
+        }
+      }
+
+      return email;    // Or pull this from cookie/localStorage
+    };
+  
+    const setEmail = function(em) {
+      if (em!==null) {
+        email = em;     
+        // Also set this in cookie/localStorage
+        if (typeof (Storage) !== "undefined") {
+          localStorage.setItem('email', email);
+        }
       }
     };
   
@@ -69,6 +94,8 @@ const UserProfile = ( function() {
       setUserId: setUserId,
       getName: getName,
       setName: setName,
+      getEmail: getEmail,
+      setEmail: setEmail,
       isAdmin: isAdmin,
       setAdmin: setAdmin
     }
